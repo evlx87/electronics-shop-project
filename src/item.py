@@ -56,12 +56,14 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path):
-        csv_path = os.path.join(os.path.dirname(__file__), '..', 'src', path)
-        with open(csv_path, encoding="cp1251") as csvfile:
+        csvpath = "../" + str(path)
+        cls.all = []
+        with open(csvpath, encoding="Windows-1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 cls(row['name'], float(row['price']), int(row['quantity']))
 
     @staticmethod
     def string_to_number(string):
-        return int(string.split(',')[0])
+        cleaned_string = string.replace('.', ',')
+        return int(cleaned_string.split(',')[0])
