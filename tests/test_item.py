@@ -48,3 +48,10 @@ def test_repr():
 def test_str():
     item = Item("TestItem", 10.0, 5)
     assert str(item) == "TestItem"
+
+
+def test_add_method():
+    item1 = Item("Item 1", 10.0, 5)
+    item2 = Item("Item 2", 5.0, 3)
+    result = item1 + item2
+    assert result == 8

@@ -27,21 +27,20 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-
-        Item.all.append(self)
+        self.__class__.all.append(self)
 
     def __repr__(self):
-        return f"Item('{self.name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def __str__(self):
-        return self.name
+        return self.__name
 
     @property
     def name(self):
         return self.__name
 
     @name.setter
-    def name(self, new_name):
+    def name(self, new_name: str) -> None:
         if len(new_name) <= 10:
             self.__name = new_name
         else:
@@ -73,3 +72,7 @@ class Item:
     def string_to_number(string):
         cleaned_string = string.replace('.', ',')
         return int(cleaned_string.split(',')[0])
+
+    def __add__(self, other: int) -> int or ValueError:
+        """Магический метод для сложения количества товара"""
+        return self.quantity + other.quantity
