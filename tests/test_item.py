@@ -31,9 +31,13 @@ def test_name_setter(sample_item):
 
 def test_instantiate_from_csv():
     csv_file = "tests/test_data.csv"
-
     Item.instantiate_from_csv(csv_file)
     assert len(Item.all) == 2
+
+
+def test_instantiate_from_csv_error():
+    csv_file = "tests/test_data.csv"
+    assert Item.instantiate_from_csv(csv_file) is None
 
 
 def test_string_to_number():
